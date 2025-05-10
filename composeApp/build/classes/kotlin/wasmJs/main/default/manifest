@@ -1,0 +1,11 @@
+abi_version=1.201.0
+builtins_platform=WASM
+compiler_version=2.1.20
+depends=components.resources\:library components.ui-tooling-preview\:library org.jetbrains.androidx.lifecycle\:lifecycle-viewmodel org.jetbrains.compose.material\:material org.jetbrains.compose.material\:material-ripple org.jetbrains.compose.foundation\:foundation org.jetbrains.compose.animation\:animation org.jetbrains.compose.material\:material-icons-core org.jetbrains.compose.foundation\:foundation-layout org.jetbrains.compose.ui\:ui org.jetbrains.kotlinx\:kotlinx-browser org.jetbrains.androidx.lifecycle\:lifecycle-runtime-compose org.jetbrains.androidx.lifecycle\:lifecycle-runtime org.jetbrains.androidx.lifecycle\:lifecycle-common org.jetbrains.compose.annotation-internal\:annotation org.jetbrains.compose.animation\:animation-core org.jetbrains.kotlinx\:kotlinx-coroutines-core org.jetbrains.kotlinx\:atomicfu org.jetbrains.compose.runtime\:runtime-saveable kotlin org.jetbrains.compose.runtime\:runtime org.jetbrains.compose.ui\:ui-text org.jetbrains.compose.ui\:ui-graphics org.jetbrains.compose.ui\:ui-unit org.jetbrains.skiko\:skiko org.jetbrains.compose.ui\:ui-geometry org.jetbrains.compose.ui\:ui-util
+ir_signature_versions=1,2
+jsOutputName=composeApp
+metadata_version=1.4.1
+serializedIrFileFingerprints=3cxrjk6uqvbcb.3i482wsc5dxlc 1mu5z2lt831wr.3e9t3yo84ve1k 2x3tm2n7ou6fb.8vzturdukxnj 1p1zy26ley619.ggdeo8f6iuq1 31o27wrp7xotq.2fe8u7yxo4mi0 1xfvv8ho41hwd.33hvqczy7g8av xzrciikzn5d4.1s9myjmxij0bu 3jvhgfysw605q.103unq2kkl6hu 1ngwgmelt1nex.2ieiovhmjnu3d
+serializedKlibFingerprint=2qkv2djx7zgp0.21kdyy9waanbf
+unique_name=portfolio\:composeApp
+wasm_targets=wasm-js
