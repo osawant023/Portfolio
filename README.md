@@ -9,7 +9,7 @@ Welcome to my **personal portfolio website**, designed and developed using **Jet
 
 - **Jetpack Compose for Web (Compose Multiplatform)**
 - **Kotlin**
-- **HTML/CSS** (via Compose styling DSL)
+- **Kotlin-WASM for Distribution**
 - **Gradle (Kotlin DSL)**
 
 ## ✨ Features
