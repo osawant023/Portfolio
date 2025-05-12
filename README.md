@@ -10,6 +10,7 @@ Welcome to my **personal portfolio website**, designed and developed using **Jet
 - **Jetpack Compose for Web (Compose Multiplatform)**
 - **Kotlin-WASM for Distribution**
 - **Gradle (Kotlin DSL)**
+- **Hosted via Github Pages**
 
 ## ✨ Features
 
