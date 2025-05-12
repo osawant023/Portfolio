@@ -1,23 +1,30 @@
-# Portfolio
-My protfolio
-This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop.
+# 🌐 Portfolio Website - Built with Jetpack Compose 
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+Welcome to my **personal portfolio website**, designed and developed using **Jetpack Compose for Web**. This project showcases my skills, experience, and projects as a software developer in a clean, modern, and fully responsive UI.
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## This portfolio is deployed on GitHub Pages and accessible at:
+👉 **Website Link:** [osawant023.github.io/Portfolio](https://osawant023.github.io/Portfolio/)
 
+## 🔧 Tech Stack
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
-[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
-[Kotlin/Wasm](https://kotl.in/wasm/)…
+- **Jetpack Compose for Web (Compose Multiplatform)**
+- **Kotlin**
+- **HTML/CSS** (via Compose styling DSL)
+- **Gradle (Kotlin DSL)**
 
-We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
-If you face any issues, please report them on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).
+## ✨ Features
 
-You can open the web application by running the `:composeApp:wasmJsBrowserDevelopmentRun` Gradle task.
+- 🧑‍💼 **About Me** – A brief introduction and professional background.
+- 🛠️ **Skills** – A categorized list of my technical competencies.
+- 🧾 **Projects** – Highlights of key projects with links and descriptions.
+- 📨 **Contact Section** – Simple and intuitive contact form (or details).
+- 🌙 **Dark/Light Theme** – Toggle between light and dark UI.
+- 📱 **Responsive Design** – Optimized layout for desktop, tablet, and mobile.
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Kotlin 1.9+
+- Compose Multiplatform plugin
+- JDK 17+
+- IntelliJ IDEA (recommended)
