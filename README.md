@@ -8,7 +8,6 @@ Welcome to my **personal portfolio website**, designed and developed using **Jet
 ## 🔧 Tech Stack
 
 - **Jetpack Compose for Web (Compose Multiplatform)**
-- **Kotlin**
 - **Kotlin-WASM for Distribution**
 - **Gradle (Kotlin DSL)**
 
