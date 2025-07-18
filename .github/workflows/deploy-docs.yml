@@ -34,7 +34,7 @@ jobs:
       - name: Sync built files into docs/
         run: |
           rm -rf docs/*
-          cp -R build/dist/wasmJs/productionExecutable/* docs/
+          cp -R composeApp/build/dist/wasmJs/productionExecutable/* docs/
 
       - name: Commit and push docs/
         uses: stefanzweifel/git-auto-commit-action@v4
