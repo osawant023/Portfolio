@@ -31,12 +31,15 @@ jobs:
       - name: Build WASM site
         run: ./gradlew wasmJsBrowserDistribution
 
-      - name: Sync built files into docs/
+      - name: Clear docs folder
         run: |
-          rm -rf docs/*
-          cp -R composeApp/build/dist/wasmJs/productionExecutable/* docs/
+              rm -rf docs/*
+              mkdir -p docs
 
-      - name: Commit and push docs/
+      - name: Copy output to docs
+        run: cp -r composeApp/build/dist/wasmJs/productionExecutable/* docs/
+
+      - name: Commit and push to docs/
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Update site via CI"
