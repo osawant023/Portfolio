@@ -31,20 +31,16 @@ jobs:
       - name: Build WASM site
         run: ./gradlew wasmJsBrowserDistribution
 
-      - name: Clear docs folder
+      - name: Sync built files into docs/
         run: |
-              rm -rf docs/*
-              mkdir -p docs
+          rm -rf docs/*
+          cp -r composeApp/build/dist/wasmJs/productionExecutable/. docs/
 
-      - name: Copy output to docs
-        run: cp -r composeApp/build/dist/wasmJs/productionExecutable/* docs/
-
-      - name: Deploy to live
-        run: |
-          git config --global user.name "osawant023"
-          git config --global user.email "osawant023@gmail.com"
-          git add docs
-          git commit -m "Deploy latest wasm build"
-          git push
+      - name: Commit and push docs/
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update site via CI"
+          branch: main
+          file_pattern: "docs/"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
