@@ -5,86 +5,92 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import com.jetpackcompose.compose_path_android.ui.theme.Typography
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.staticCompositionLocalOf
+import com.app.ui.design.DarkPortfolioColors
+import com.app.ui.design.LightPortfolioColors
+import com.app.ui.design.PortfolioColors
+import com.app.ui.design.Spacing
 
+// ============================================================
+// Material 3 Color Schemes
+// ============================================================
 private val DarkColorScheme = darkColorScheme(
-    primary = PrimaryDark,
-    onPrimary = Black,
-    primaryContainer = PrimaryDark,
-    onPrimaryContainer = Black,
-    inversePrimary = PrimaryDark,
-    secondary = SecondaryDark,
-    onSecondary = PrimaryDark,
-    secondaryContainer = SecondaryDark,
-    onSecondaryContainer = Black,
-    tertiary = TertiaryDark,
-    onTertiary = White,
-    tertiaryContainer = TertiaryDark,
-    onTertiaryContainer = White,
-    background = Black,
-    onBackground = White,
-    surface = PrimaryDark,
-    onSurface = White,
-    surfaceVariant = PrimaryDark,
-    onSurfaceVariant = White,
-    surfaceTint = White,
-    inverseSurface = White,
-    inverseOnSurface = Black,
-    error = Red,
-    onError = Black,
-    errorContainer = Red,
-    onErrorContainer = Black,
-    outline = White,
-    outlineVariant = White,
-    scrim = White,
-)
-
-val LightColorScheme = lightColorScheme(
     primary = Primary,
-    onPrimary = White,
-    primaryContainer = Primary,
-    onPrimaryContainer = White,
-    inversePrimary = Primary,
     secondary = Secondary,
-    onSecondary = Primary,
-    secondaryContainer = Secondary,
-    onSecondaryContainer = White,
-    tertiary = Tertiary,
-    onTertiary = Black,
-    tertiaryContainer = Tertiary,
-    onTertiaryContainer = Black,
-    background = White,
-    onBackground = Black,
-    surface = Primary,
-    onSurface = White,
-    surfaceVariant = Primary,
-    onSurfaceVariant = White,
-    surfaceTint = Black,
-    inverseSurface = Black,
-    inverseOnSurface = White,
-    error = Red,
-    onError = White,
-    errorContainer = Red,
-    onErrorContainer = White,
-    outline = Black,
-    outlineVariant = Black,
-    scrim = Black
+    tertiary = Accent,
+    background = DarkBackground,
+    surface = DarkSurface,
+    onPrimary = DarkBackground,
+    onSecondary = DarkBackground,
+    onBackground = DarkTextPrimary,
+    onSurface = DarkTextPrimary,
+    outline = DarkBorder
 )
 
-@Composable
-fun ComposePathTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
-    content: @Composable () -> Unit,
-) {
-    val colorScheme = when {
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
+private val LightColorScheme = lightColorScheme(
+    primary = Primary,
+    secondary = Secondary,
+    tertiary = Accent,
+    background = LightBackground,
+    surface = LightSurface,
+    onPrimary = LightBackground,
+    onSecondary = LightBackground,
+    onBackground = LightTextPrimary,
+    onSurface = LightTextPrimary,
+    outline = LightBorder
+)
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+// ============================================================
+// Composition Locals
+// ============================================================
+val LocalPortfolioColors = staticCompositionLocalOf<PortfolioColors> {
+    DarkPortfolioColors
+}
+
+val LocalPortfolioSpacing = staticCompositionLocalOf { Spacing }
+
+// ============================================================
+// PortfolioTheme — central access point
+// Usage: PortfolioTheme.colors.primary
+//        PortfolioTheme.spacing.medium
+//        PortfolioTheme.typography.bodyLarge
+// ============================================================
+object PortfolioTheme {
+    val colors: PortfolioColors
+        @Composable @ReadOnlyComposable
+        get() = LocalPortfolioColors.current
+
+    val spacing: Spacing
+        @Composable @ReadOnlyComposable
+        get() = LocalPortfolioSpacing.current
+
+    val typography: androidx.compose.material3.Typography
+        @Composable @ReadOnlyComposable
+        get() = MaterialTheme.typography
+}
+
+// ============================================================
+// Theme Composable
+// ============================================================
+@Composable
+fun PortfolioAppTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+    val portfolioColors = if (darkTheme) DarkPortfolioColors else LightPortfolioColors
+    val materialColorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
+
+    CompositionLocalProvider(
+        LocalPortfolioColors provides portfolioColors,
+        LocalPortfolioSpacing provides Spacing
+    ) {
+        MaterialTheme(
+            colorScheme = materialColorScheme,
+            typography = PortfolioTypography,
+            shapes = PortfolioShapes,
+            content = content
+        )
+    }
 }
