@@ -36,8 +36,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun PortfolioScreen(
     onEmailClick: () -> Unit = {},
-    onLinkedInClick: () -> Unit = {},
-    onGitHubClick: () -> Unit = {},
+    onOpenUrl: (String) -> Unit = {},
     onPhoneClick: () -> Unit = {}
 ) {
     val colors = PortfolioTheme.colors
@@ -80,20 +79,19 @@ fun PortfolioScreen(
         item { ExperienceSection() }
 
         // 5. Projects
-        item { ProjectsSection() }
+        item { ProjectsSection(onOpenUrl = onOpenUrl) }
 
         // 6. Education
         item { EducationSection() }
 
         // 7. Certifications
-        item { CertificationsSection() }
+        item { CertificationsSection(onOpenUrl = onOpenUrl) }
 
         // 8. Contact
         item {
             ContactSection(
                 onEmailClick = onEmailClick,
-                onLinkedInClick = onLinkedInClick,
-                onGitHubClick = onGitHubClick,
+                onOpenUrl = onOpenUrl,
                 onPhoneClick = onPhoneClick
             )
         }

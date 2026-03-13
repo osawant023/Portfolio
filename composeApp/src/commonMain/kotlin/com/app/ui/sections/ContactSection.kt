@@ -31,17 +31,16 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.app.data.PortfolioData
 import com.app.ui.components.GradientButton
 import com.app.ui.components.SectionHeader
 import com.app.ui.theme.PortfolioTheme
-import com.app.data.PortfolioData
 
 @Composable
 fun ContactSection(
     modifier: Modifier = Modifier,
     onEmailClick: () -> Unit = {},
-    onLinkedInClick: () -> Unit = {},
-    onGitHubClick: () -> Unit = {},
+    onOpenUrl: (String) -> Unit = {},
     onPhoneClick: () -> Unit = {}
 ) {
     val colors = PortfolioTheme.colors
@@ -122,13 +121,15 @@ fun ContactSection(
                 icon = Icons.Default.Person,
                 label = "LinkedIn",
                 value = PortfolioData.linkedIn,
-                onClick = onLinkedInClick
+                onClick = {onOpenUrl(PortfolioData.linkedInUrl)}
             )
             ContactRow(
                 icon = Icons.Default.Code,
                 label = "GitHub",
                 value = PortfolioData.github,
-                onClick = onGitHubClick
+                onClick = {
+                    onOpenUrl(PortfolioData.githubUrl)
+                }
             )
             ContactRow(
                 icon = Icons.Default.Phone,
