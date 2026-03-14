@@ -74,13 +74,13 @@ fun AboutSection(modifier: Modifier = Modifier) {
             ) {
                 Column {
                     Text(
-                        text = "📍 ${PortfolioData.location}",
+                        text = PortfolioData.location,
                         style = MaterialTheme.typography.bodyMedium,
                         color = colors.textSecondary
                     )
                     Spacer(Modifier.height(4.dp))
                     Text(
-                        text = "📱 ${PortfolioData.phone}",
+                        text = PortfolioData.phone,
                         style = MaterialTheme.typography.bodyMedium,
                         color = colors.textSecondary
                     )

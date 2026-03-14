@@ -2,6 +2,7 @@ package com.app.ui.sections
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,15 +29,15 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.app.data.PortfolioData
+import com.app.data.Project
 import com.app.ui.components.ChipVariant
 import com.app.ui.components.SectionHeader
 import com.app.ui.components.SkillChip
 import com.app.ui.theme.PortfolioTheme
-import com.app.data.PortfolioData
-import com.app.data.Project
 
 @Composable
-fun ProjectsSection(modifier: Modifier = Modifier) {
+fun ProjectsSection(modifier: Modifier = Modifier , onOpenUrl : (String) -> Unit = {}) {
     val colors = PortfolioTheme.colors
     val spacing = PortfolioTheme.spacing
 
@@ -56,7 +57,8 @@ fun ProjectsSection(modifier: Modifier = Modifier) {
         PortfolioData.projects.forEachIndexed { index, project ->
             ProjectCard(
                 project = project,
-                index = index
+                index = index,
+                onOpenUrl = onOpenUrl
             )
             Spacer(Modifier.height(spacing.medium))
         }
@@ -67,7 +69,8 @@ fun ProjectsSection(modifier: Modifier = Modifier) {
 private fun ProjectCard(
     project: Project,
     index: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onOpenUrl : (String) -> Unit = {}
 ) {
     val colors = PortfolioTheme.colors
     val spacing = PortfolioTheme.spacing
@@ -129,6 +132,9 @@ private fun ProjectCard(
                             .background(colors.chipBackground)
                             .border(1.dp, colors.chipBorder, RoundedCornerShape(8.dp))
                             .padding(8.dp)
+                            .clickable{
+                                onOpenUrl(project.playStoreUrl)
+                            }
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
@@ -141,7 +147,7 @@ private fun ProjectCard(
                                 modifier = Modifier.size(14.dp)
                             )
                             Text(
-                                text = "Play",
+                                text = "Link",
                                 color = colors.primary,
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.SemiBold

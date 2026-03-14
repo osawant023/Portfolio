@@ -42,35 +42,37 @@ object PortfolioData {
     val role = "Senior Android Developer"
     val location = "Mumbai, India"
     val phone = "8779985574"
-    val email = "omkar@email.com" // placeholder
-    val linkedIn = "linkedin.com/in/omkarsawant"
-    val github = "github.com/omkarsawant"
+    val email = "osawant023@gmail.com" // placeholder
+    val linkedIn = "Omkar Sawant"
+    val linkedInUrl = "https://www.linkedin.com/in/omkarsawant2103"
+    val github = "osawant023"
+    val githubUrl = "https://www.github.com/osawant023"
     val portfolio = "Portfolio"
     val yearsOfExperience = "6+"
 
     val heroTagline = "Building high-quality Android apps with Kotlin & Jetpack Compose"
-    val aboutSummary = """
-        Senior Android Developer with $yearsOfExperience years of experience building and shipping 
-        high-quality Android apps using Kotlin, Java, Jetpack Compose, and modern architecture patterns 
-        (MVVM/MVI). Known for improving team performance through reusable components, clear documentation, 
-        and mentoring, while partnering closely with product, design, and engineering to deliver reliable, 
-        user-friendly experiences.
-    """.trimIndent()
+    val aboutSummary = buildString {
+        append("Senior Android Developer with ")
+        append(yearsOfExperience)
+        append(" years of experience building and shipping high-quality Android apps using Kotlin, Java, Jetpack Compose, and modern architecture patterns (MVVM/MVI).")
+        append("Known for improving team performance through reusable components, clear documentation, and mentoring,")
+        append("while partnering closely with product, design, and engineering to deliver reliable, user-friendly experiences.")
+    }
 
     val aboutStats = listOf(
         Pair("6+", "Years Experience"),
         Pair("10+", "Apps Shipped"),
         Pair("4", "Devs Mentored"),
-        Pair("15%", "UX Score ↑")
+        Pair("1+", "Exp in KMP/CMP"),
     )
 
     val skills = listOf(
         // Languages
-        "Kotlin", "Java",
+        "Kotlin", "Java", "Dart", "Swift",
         // UI
         "Jetpack Compose", "Material 3", "XML Layouts",
         // Architecture
-        "MVVM", "MVI", "SOLID", "Hexagonal",
+        "MVVM", "MVI", "SOLID",
         // Networking
         "REST APIs", "GraphQL", "Ktor", "Retrofit",
         // Storage
@@ -90,9 +92,9 @@ object PortfolioData {
     )
 
     val skillCategories = listOf(
-        Pair("Languages", listOf("Kotlin", "Java")),
+        Pair("Languages", listOf("Kotlin", "Java","Dart", "Swift")),
         Pair("UI", listOf("Jetpack Compose", "Material 3", "XML Layouts", "Custom Animations")),
-        Pair("Architecture", listOf("MVVM", "MVI", "SOLID", "Hexagonal", "Clean Architecture")),
+        Pair("Architecture", listOf("MVVM", "MVI", "SOLID", "Multi-Module", "Clean Architecture")),
         Pair("Networking", listOf("REST APIs", "GraphQL", "Ktor", "Retrofit")),
         Pair("Storage", listOf("Room", "SQLite", "Offline-First")),
         Pair("DI & Tools", listOf("Koin", "Hilt", "Git", "CI/CD", "SonarQube")),
@@ -102,7 +104,7 @@ object PortfolioData {
 
     val experiences = listOf(
         Experience(
-            company = "Neosoft",
+            company = "NeoSOFT",
             location = "Mumbai",
             role = "Senior Software Engineer",
             period = "Jan 2025 – Present",
@@ -160,7 +162,7 @@ object PortfolioData {
                 "Improved code quality through refactoring and SonarQube compliance",
                 "Implemented REST APIs using Ktor with centralized CL object initialization"
             ),
-            techStack = listOf("Kotlin", "Jetpack Compose", "MVI", "Hexagonal", "Ktor", "Koin", "SDK")
+            techStack = listOf("Kotlin", "Jetpack Compose", "MVI", "Clean Architecture", "Ktor", "Koin", "SDK")
         ),
         Project(
             title = "TATA CLIQ — AR Try-On",
@@ -171,7 +173,7 @@ object PortfolioData {
                 "Supported try-on for sunglasses, lipstick, eyelashes, and blush",
                 "Enhanced virtual preview realism and real-time rendering performance"
             ),
-            techStack = listOf("Kotlin", "Jetpack Compose", "MVVM", "ARCore", "SceneView", "Hexagonal")
+            techStack = listOf("Kotlin", "Jetpack Compose", "MVVM", "ARCore", "SceneView", "Clean Architecture")
         ),
         Project(
             title = "Salamtek",
@@ -184,7 +186,7 @@ object PortfolioData {
                 "Managed complete release lifecycle including Play Store deployment"
             ),
             techStack = listOf("Kotlin", "Jetpack Compose", "MVVM", "Room", "Twilio", "FCM", "Retrofit", "GoogleMaps"),
-            playStoreUrl = "https://play.google.com"
+            playStoreUrl = "https://play.google.com/store/apps/details?id=com.app.salamtek"
         ),
         Project(
             title = "Mawada",
@@ -196,7 +198,7 @@ object PortfolioData {
                 "Integrated ExoPlayer for in-app media playback"
             ),
             techStack = listOf("Kotlin", "MVVM", "Room", "Firebase", "GoogleMaps", "ExoPlayer", "REST"),
-            playStoreUrl = "https://play.google.com"
+            playStoreUrl = "https://play.google.com/store/apps/details?id=com.app.mawada"
         ),
         Project(
             title = "PIQR",
@@ -208,7 +210,7 @@ object PortfolioData {
                 "Managed full QA validation and Play Store release cycle"
             ),
             techStack = listOf("Kotlin", "MVVM", "Room", "Firebase", "GoogleMaps", "ExoPlayer"),
-            playStoreUrl = "https://play.google.com"
+            playStoreUrl = "https://play.google.com/store/apps/details?id=com.app.piqr"
         )
     )
 
@@ -225,7 +227,7 @@ object PortfolioData {
         Certification(
             title = "Kotlin Multiplatform Masterclass",
             issuer = "KMP, KMM — Android, iOS",
-            credentialUrl = "#"
+            credentialUrl = "https://www.udemy.com/certificate/UC-75d8a833-3544-41f1-a32f-a14bf7943e60/"
         )
     )
 }

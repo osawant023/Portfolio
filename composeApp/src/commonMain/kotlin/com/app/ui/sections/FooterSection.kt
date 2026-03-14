@@ -68,7 +68,7 @@ fun FooterSection(modifier: Modifier = Modifier) {
         )
         Spacer(Modifier.height(4.dp))
         Text(
-            text = "Designed & Developed with ❤️ in Mumbai",
+            text = "Designed & Developed in Mumbai",
             style = MaterialTheme.typography.labelSmall,
             color = colors.textSecondary.copy(alpha = 0.6f),
             textAlign = TextAlign.Center
