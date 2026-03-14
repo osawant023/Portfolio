@@ -63,7 +63,6 @@ object PortfolioData {
         Pair("6+", "Years Experience"),
         Pair("10+", "Apps Shipped"),
         Pair("4", "Devs Mentored"),
-        Pair("1+", "Exp in KMP/CMP"),
     )
 
     val skills = listOf(
