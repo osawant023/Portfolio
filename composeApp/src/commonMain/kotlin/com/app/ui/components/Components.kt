@@ -198,7 +198,7 @@ fun PortfolioCard(
         border = BorderStroke(1.dp, colors.border)
     ) {
         Column(
-            modifier = Modifier.padding(spacing.cardPadding),
+            modifier = Modifier.fillMaxWidth().padding(spacing.cardPadding),
             content = content
         )
     }

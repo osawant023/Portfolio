@@ -44,7 +44,7 @@ fun PortfolioScreen(
 
     // Scroll-to-contact index (index 8 in lazy list)
     val coroutineScope = rememberCoroutineScope()
-    val contactIndex = 8
+    val contactIndex = 7
 
     LazyColumn(
         state = listState,
@@ -63,7 +63,7 @@ fun PortfolioScreen(
                 },
                 onViewWorkClick = {
                     coroutineScope.launch {
-                        listState.animateScrollToItem(5) // Projects section
+                        listState.animateScrollToItem(4) // Projects section
                     }
                 }
             )

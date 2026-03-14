@@ -131,7 +131,7 @@ fun HeroSection(
                 )
             }
             .padding(horizontal = spacing.screenHorizontal)
-            .padding(top = 80.dp, bottom = spacing.section)
+            .padding(top = 40.dp, bottom = spacing.section)
     ) {
         Column(
             modifier = Modifier
@@ -140,6 +140,33 @@ fun HeroSection(
                 .alpha(alphaAnim),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // TechBadge — "Built with Jetpack Compose"
+            TechBadge(text = "Built with Jetpack Compose")
+
+            Spacer(Modifier.height(spacing.xxlarge))
+
+            // Name
+            Text(
+                text = PortfolioData.name,
+                style = MaterialTheme.typography.displayLarge,
+                color = Color.White,
+                fontWeight = FontWeight.Black,
+                textAlign = TextAlign.Center
+            )
+
+            Spacer(Modifier.height(spacing.small))
+
+            // Role — gradient text effect via Box overlay trick
+            Text(
+                text = PortfolioData.role,
+                style = MaterialTheme.typography.headlineMedium,
+                color = colors.primary,
+                fontWeight = FontWeight.SemiBold,
+                textAlign = TextAlign.Center
+            )
+
+            Spacer(Modifier.height(spacing.medium))
+
             // Availability badge
             Box(
                 modifier = Modifier
@@ -164,33 +191,6 @@ fun HeroSection(
                     )
                 }
             }
-
-            Spacer(Modifier.height(spacing.large))
-
-            // Name
-            Text(
-                text = PortfolioData.name,
-                style = MaterialTheme.typography.displayLarge,
-                color = Color.White,
-                fontWeight = FontWeight.Black,
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(Modifier.height(spacing.small))
-
-            // Role — gradient text effect via Box overlay trick
-            Text(
-                text = PortfolioData.role,
-                style = MaterialTheme.typography.headlineMedium,
-                color = colors.primary,
-                fontWeight = FontWeight.SemiBold,
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(Modifier.height(spacing.medium))
-
-            // TechBadge — "Built with Jetpack Compose"
-            TechBadge(text = "Built with Jetpack Compose")
 
             Spacer(Modifier.height(spacing.large))
 

@@ -51,7 +51,7 @@ fun ContactSection(
             .fillMaxWidth()
             .padding(horizontal = spacing.screenHorizontal)
             .padding(vertical = spacing.section),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.Start
     ) {
         SectionHeader(
             title = "Get in Touch",
@@ -99,7 +99,7 @@ fun ContactSection(
             )
             Spacer(Modifier.height(spacing.large))
             GradientButton(
-                text = "Say Hello 👋",
+                text = "Say Hello",
                 onClick = onEmailClick
             )
         }
