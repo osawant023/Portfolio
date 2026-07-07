@@ -1,6 +1,7 @@
 package com.app.ui.sections
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,10 +21,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.app.ui.components.PortfolioCard
+import com.app.ui.components.GlassCard
 import com.app.ui.components.SectionHeader
 import com.app.ui.theme.PortfolioTheme
 import com.app.data.PortfolioData
@@ -39,55 +40,58 @@ fun EducationSection(modifier: Modifier = Modifier) {
             .padding(horizontal = spacing.screenHorizontal)
             .padding(vertical = spacing.section)
     ) {
-        SectionHeader(title = "Education")
+        SectionHeader(
+            title = "Education",
+            labelPrefix = "ACADEMICS"
+        )
 
         Spacer(Modifier.height(spacing.large))
 
         PortfolioData.education.forEach { edu ->
-            PortfolioCard {
-                Row(
-                    verticalAlignment = Alignment.Top,
-                    horizontalArrangement = Arrangement.spacedBy(spacing.medium)
-                ) {
-                    // Icon box
-                    Box(
-                        modifier = Modifier
-                            .size(44.dp)
-                            .clip(RoundedCornerShape(10.dp))
-                            .background(
-                                brush = Brush.linearGradient(
-                                    listOf(colors.accentGradientStart, colors.accentGradientEnd)
-                                )
-                            ),
-                        contentAlignment = Alignment.Center
+            GlassCard {
+                Column(modifier = Modifier.padding(spacing.cardPadding)) {
+                    Row(
+                        verticalAlignment = Alignment.Top,
+                        horizontalArrangement = Arrangement.spacedBy(spacing.medium)
                     ) {
-                        Icon(
-                            imageVector = Icons.Default.School,
-                            contentDescription = null,
-                            tint = colors.background,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
+                        Box(
+                            modifier = Modifier
+                                .size(40.dp)
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(colors.accent.copy(alpha = 0.12f))
+                                .border(1.dp, colors.accent.copy(alpha = 0.2f), RoundedCornerShape(8.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.School,
+                                contentDescription = null,
+                                tint = colors.accent,
+                                modifier = Modifier.size(22.dp)
+                            )
+                        }
 
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = edu.degree,
-                            style = MaterialTheme.typography.titleLarge,
-                            color = colors.textPrimary,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Spacer(Modifier.height(4.dp))
-                        Text(
-                            text = edu.institution,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = colors.primary
-                        )
-                        Spacer(Modifier.height(4.dp))
-                        Text(
-                            text = "${edu.location} · ${edu.period}",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = colors.textSecondary
-                        )
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = edu.degree,
+                                style = MaterialTheme.typography.titleLarge,
+                                color = colors.textPrimary,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Spacer(Modifier.height(4.dp))
+                            Text(
+                                text = edu.institution,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = colors.accent,
+                                fontFamily = FontFamily.Monospace
+                            )
+                            Spacer(Modifier.height(4.dp))
+                            Text(
+                                text = "${edu.location} · ${edu.period}",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = colors.textSecondary,
+                                fontFamily = FontFamily.Monospace
+                            )
+                        }
                     }
                 }
             }
