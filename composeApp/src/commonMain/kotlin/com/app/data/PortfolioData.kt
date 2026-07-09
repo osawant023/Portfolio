@@ -38,6 +38,7 @@ data class Certification(
 // ============================================================
 object PortfolioData {
 
+    val web3FormsAccessKey  = "bd914a9e-7252-4818-92fe-4d31e7c9fa3d"
     val name = "Omkar Sawant"
     val role = "Senior Android Developer"
     val location = "Mumbai, India"
@@ -48,7 +49,7 @@ object PortfolioData {
     val github = "osawant023"
     val githubUrl = "https://www.github.com/osawant023"
     val portfolio = "Portfolio"
-    val yearsOfExperience = "6+"
+    val yearsOfExperience = "7+"
 
     val heroTagline = "Building high-quality Android apps with Kotlin & Jetpack Compose"
     val aboutSummary = buildString {
@@ -60,9 +61,10 @@ object PortfolioData {
     }
 
     val aboutStats = listOf(
-        Pair("6+", "Years Experience"),
+        Pair("7+", "Years Experience"),
         Pair("10+", "Apps Shipped"),
         Pair("4", "Devs Mentored"),
+        Pair("2+", "Exp in KMP/CMP"),
     )
 
     val skills = listOf(

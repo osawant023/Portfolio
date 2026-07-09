@@ -2,47 +2,42 @@ package com.app.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// === PRIMARY PALETTE ===
-val Primary = Color(0xFF00D4AA)          // Teal accent
-val PrimaryVariant = Color(0xFF00A884)
-val Secondary = Color(0xFF7C5CBF)        // Purple
-val Accent = Color(0xFFFF6B35)           // Orange accent
+// === PRIMARY PALETTE — Mint-green accent (Stitch Design) ===
+val Primary = Color(0xFFFFFFFF)           // White text
+val PrimaryVariant = Color(0xFF7CFBA8)
+val Secondary = Color(0xFFC0C7D1)          // Light gray
+val Accent = Color(0xFF5FDE8E)             // Mint accent (primary-fixed-dim)
+val MintAccent = Color(0xFF80FFAB)         // Mint glow
 
 // === DARK THEME ===
-val DarkBackground = Color(0xFF0A0E1A)
-val DarkSurface = Color(0xFF111827)
-val DarkCard = Color(0xFF1A2235)
-val DarkCardElevated = Color(0xFF1F2A40)
-val DarkBorder = Color(0xFF2A3550)
-val DarkTextPrimary = Color(0xFFF0F4FF)
-val DarkTextSecondary = Color(0xFF8B9CBF)
-
-// === LIGHT THEME ===
-val LightBackground = Color(0xFFF5F7FF)
-val LightSurface = Color(0xFFFFFFFF)
-val LightCard = Color(0xFFFFFFFF)
-val LightCardElevated = Color(0xFFF0F4FF)
-val LightBorder = Color(0xFFE2E8F0)
-val LightTextPrimary = Color(0xFF0D1B2A)
-val LightTextSecondary = Color(0xFF64748B)
+val DarkBackground = Color(0xFF0E1510)     // Dark green-black
+val DarkSurface = Color(0xFF0E1510)
+val DarkCard = Color(0xFF1A211B)           // Surface container
+val DarkCardElevated = Color(0xFF252C26)   // Surface container high
+val DarkBorder = Color(0xFF3D4A3F)         // Outline variant
+val DarkTextPrimary = Color(0xFFDDE4DB)    // On surface
+val DarkTextSecondary = Color(0xFFBCCABC)  // On surface variant
+val DarkSurfaceContainerHighest = Color(0xFF303630)
 
 // === GRADIENTS ===
-val GradientStart = Color(0xFF00D4AA)
-val GradientEnd = Color(0xFF7C5CBF)
-val HeroGradientStart = Color(0xFF0A0E1A)
-val HeroGradientEnd = Color(0xFF1A2235)
+val GradientStart = Color(0xFF5FDE8E)      // Mint accent
+val GradientEnd = Color(0xFF7CFBA8)        // Primary fixed
+val HeroGradientStart = Color(0xFF0E1510)
+val HeroGradientEnd = Color(0xFF1A211B)
 
 // === SEMANTIC ===
-val Success = Color(0xFF22C55E)
-val Warning = Color(0xFFF59E0B)
-val Error = Color(0xFFEF4444)
-val Info = Color(0xFF3B82F6)
+val Success = Color(0xFF5FDE8E)
+val Warning = Color(0xFFFCE09F)            // Tertiary fixed
+val Error = Color(0xFFFFB4AB)              // Error
+val Info = Color(0xFF7CFBA8)
 
 // === TECH BADGE ===
-val TechBadgeBg = Color(0xFF1A2235)
-val TechBadgeBorder = Color(0xFF00D4AA)
-val TechBadgeText = Color(0xFF00D4AA)
+val TechBadgeBg = DarkSurfaceContainerHighest
+val TechBadgeBorder = Color(0xFF3D4A3F)
+val TechBadgeText = Primary
 
 // === TIMELINE ===
-val TimelineLine = Color(0xFF2A3550)
-val TimelineDot = Color(0xFF00D4AA)
+val TimelineLine = Color(0xFF3D4A3F)
+val TimelineDot = Accent
+val GlassCardBg = Color(0x99303630)        // rgba(48,54,48,0.6)
+val GlassCardBorder = Color(0x1ABCCABC)    // rgba(188,202,188,0.1)

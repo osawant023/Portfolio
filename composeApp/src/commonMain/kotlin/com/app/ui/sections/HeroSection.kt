@@ -8,18 +8,11 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -40,16 +33,22 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.app.ui.components.GradientButton
 import com.app.ui.components.OutlineButton
-import com.app.ui.components.TechBadge
+import com.app.ui.design.PortfolioColors
 import com.app.ui.theme.PortfolioTheme
 import com.app.data.PortfolioData
+import com.app.ui.design.Spacing
 import kotlinx.coroutines.delay
+import org.jetbrains.compose.resources.painterResource
+import portfolio.composeapp.generated.resources.Res
+import portfolio.composeapp.generated.resources.profile_pic
 
 @Composable
 fun HeroSection(
@@ -60,7 +59,6 @@ fun HeroSection(
     val colors = PortfolioTheme.colors
     val spacing = PortfolioTheme.spacing
 
-    // Entry animations
     var visible by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         delay(100)
@@ -78,194 +76,303 @@ fun HeroSection(
         label = "hero_slide"
     )
 
-    // Bouncing arrow
-    val arrowOffset by rememberInfiniteTransition(label = "arrow").animateFloat(
+    val fullName = PortfolioData.name
+    var displayedName by remember { mutableStateOf("") }
+    LaunchedEffect(visible) {
+        if (visible) {
+            displayedName = ""
+            for (i in fullName.indices) {
+                delay(80)
+                displayedName = fullName.substring(0, i + 1)
+            }
+        }
+    }
+
+    val cursorVisible by rememberInfiniteTransition(label = "cursor").animateFloat(
         initialValue = 0f,
-        targetValue = 8f,
+        targetValue = 1f,
         animationSpec = infiniteRepeatable(
-            animation = tween(900, easing = FastOutSlowInEasing),
+            animation = tween(600),
             repeatMode = RepeatMode.Reverse
         ),
-        label = "arrow_bounce"
+        label = "cursor_blink"
     )
 
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFF0A0E1A),
-                        Color(0xFF0F1629),
-                        Color(0xFF111827)
-                    )
-                )
-            )
-            // Decorative grid pattern drawn on canvas
+            .background(Color(0xFF0E1510))
             .drawBehind {
-                val gridColor = Color(0xFF1A2235)
-                val spacing = 40f
-                var x = 0f
+                val dotColor = Color(0xFF1A211B)
+                val dotSpacing = 32f
+                val dotRadius = 1f
+                var x = dotSpacing
                 while (x < size.width) {
-                    drawLine(gridColor, Offset(x, 0f), Offset(x, size.height), 0.5f)
-                    x += spacing
-                }
-                var y = 0f
-                while (y < size.height) {
-                    drawLine(gridColor, Offset(0f, y), Offset(size.width, y), 0.5f)
-                    y += spacing
+                    var y = dotSpacing
+                    while (y < size.height) {
+                        drawCircle(dotColor, dotRadius, Offset(x, y))
+                        y += dotSpacing
+                    }
+                    x += dotSpacing
                 }
 
-                // Glow circle
                 drawCircle(
                     brush = Brush.radialGradient(
                         colors = listOf(
-                            Color(0x3000D4AA),
+                            Color(0x205FDE8E),
                             Color.Transparent
                         ),
-                        center = Offset(size.width * 0.7f, size.height * 0.3f),
-                        radius = 400f
+                        center = Offset(size.width * 0.5f, size.height * 0.35f),
+                        radius = 500f
                     ),
-                    radius = 400f,
-                    center = Offset(size.width * 0.7f, size.height * 0.3f)
+                    radius = 500f,
+                    center = Offset(size.width * 0.5f, size.height * 0.35f)
                 )
             }
             .padding(horizontal = spacing.screenHorizontal)
-            .padding(top = 40.dp, bottom = spacing.section)
+            .padding(top = 16.dp, bottom = spacing.section)
     ) {
-        Column(
+        BoxWithConstraints(
             modifier = Modifier
                 .fillMaxWidth()
                 .offset(y = slideAnim)
-                .alpha(alphaAnim),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .alpha(alphaAnim)
         ) {
-            // TechBadge — "Built with Jetpack Compose"
-            TechBadge(text = "Built with Jetpack Compose")
+            val isMobile = maxWidth < 768.dp
 
-            Spacer(Modifier.height(spacing.xxlarge))
-
-            // Name
-            Text(
-                text = PortfolioData.name,
-                style = MaterialTheme.typography.displayLarge,
-                color = Color.White,
-                fontWeight = FontWeight.Black,
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(Modifier.height(spacing.small))
-
-            // Role — gradient text effect via Box overlay trick
-            Text(
-                text = PortfolioData.role,
-                style = MaterialTheme.typography.headlineMedium,
-                color = colors.primary,
-                fontWeight = FontWeight.SemiBold,
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(Modifier.height(spacing.medium))
-
-            // Availability badge
-            Box(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(50.dp))
-                    .background(Color(0xFF0D2E1F))
-                    .padding(horizontal = 12.dp, vertical = 5.dp)
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+            if (isMobile) {
+                // Stack vertically on mobile screen configurations
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.Start
                 ) {
-                    Box(
-                        Modifier
-                            .size(6.dp)
-                            .background(Color(0xFF22C55E), RoundedCornerShape(50.dp))
+                    MagazineHeaderBlock(
+                        colors = colors,
+                        displayedName = displayedName,
+                        cursorVisible = cursorVisible,
+                        isMobile = true
                     )
-                    Text(
-                        text = "Open to opportunities",
-                        color = Color(0xFF4ADE80),
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Medium
+
+                    Spacer(Modifier.height(32.dp))
+
+                    // Centered circular profile image with glow
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        ProfileImageGlow(colors = colors, size = 200)
+                    }
+
+                    Spacer(Modifier.height(32.dp))
+
+                    MainTextAndButtonsBlock(
+                        colors = colors,
+                        spacing = spacing,
+                        onContactClick = onContactClick,
+                        onViewWorkClick = onViewWorkClick,
+                        isMobile = true
                     )
                 }
-            }
-
-            Spacer(Modifier.height(spacing.large))
-
-            // Tagline
-            Text(
-                text = PortfolioData.heroTagline,
-                style = MaterialTheme.typography.bodyLarge,
-                color = Color(0xFF8B9CBF),
-                textAlign = TextAlign.Center,
-                modifier = Modifier.widthIn(max = 360.dp)
-            )
-
-            Spacer(Modifier.height(spacing.xlarge))
-
-            // CTA Buttons
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(spacing.medium),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                GradientButton(
-                    text = "Get in Touch",
-                    onClick = onContactClick
-                )
-                OutlineButton(
-                    text = "View Work",
-                    onClick = onViewWorkClick
-                )
-            }
-
-            Spacer(Modifier.height(spacing.xlarge))
-
-            // Quick Stats
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                PortfolioData.aboutStats.forEach { (value, label) ->
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = value,
-                            color = colors.primary,
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Black
+            } else {
+                // Row layout (Side-by-side) on desktop
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.Top
+                ) {
+                    Column(
+                        modifier = Modifier.weight(1.5f),
+                        horizontalAlignment = Alignment.Start
+                    ) {
+                        MagazineHeaderBlock(
+                            colors = colors,
+                            displayedName = displayedName,
+                            cursorVisible = cursorVisible,
+                            isMobile = false
                         )
-                        Text(
-                            text = label,
-                            color = Color(0xFF8B9CBF),
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Medium
+
+                        Spacer(Modifier.height(80.dp))
+
+                        MainTextAndButtonsBlock(
+                            colors = colors,
+                            spacing = spacing,
+                            onContactClick = onContactClick,
+                            onViewWorkClick = onViewWorkClick,
+                            isMobile = false
                         )
+                    }
+
+                    // Large circular profile image at right center
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(start = spacing.large),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        ProfileImageGlow(colors = colors, size = 360)
                     }
                 }
             }
+        }
+    }
+}
 
-            Spacer(Modifier.height(spacing.section))
+@Composable
+private fun ProfileImageGlow(colors: PortfolioColors, size: Int) {
+    Box(contentAlignment = Alignment.Center) {
+        // Glow Backdrop
+        Box(
+            modifier = Modifier
+                .size((size + 30).dp)
+                .background(
+                    brush = Brush.radialGradient(
+                        colors = listOf(
+                            Color(0x605FDE8E),
+                            Color.Transparent
+                        )
+                    ),
+                    shape = CircleShape
+                )
+        )
 
-            // Scroll indicator
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.offset(y = arrowOffset.dp)
+        // Circle Profile Image
+        Image(
+            painter = painterResource(Res.drawable.profile_pic),
+            contentDescription = "Omkar Sawant Profile Image",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(size.dp)
+                .clip(CircleShape)
+                .border(3.dp, colors.accent, CircleShape)
+        )
+    }
+}
+
+@Composable
+private fun MagazineHeaderBlock(
+    colors: PortfolioColors,
+    displayedName: String,
+    cursorVisible: Float,
+    isMobile: Boolean
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 24.dp),
+        horizontalArrangement = Arrangement.spacedBy(if (isMobile) 12.dp else 24.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        // Left: OS Emblem
+        Text(
+            text = "OS",
+            style = androidx.compose.ui.text.TextStyle(
+                fontSize = if (isMobile) 70.sp else 100.sp,
+                fontWeight = FontWeight.ExtraBold,
+                fontFamily = FontFamily.SansSerif,
+                color = colors.textSecondary.copy(alpha = 0.05f),
+                letterSpacing = (-4).sp
+            )
+        )
+
+        // Right: Content Column (uses weight so it sits side-by-side cleanly)
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .drawBehind {
+                    drawLine(
+                        color = colors.border.copy(alpha = 0.2f),
+                        start = Offset(0f, size.height),
+                        end = Offset(size.width, size.height),
+                        strokeWidth = 1.dp.toPx()
+                    )
+                }
+                .padding(bottom = 12.dp),
+            verticalArrangement = Arrangement.spacedBy(2.dp)
+        ) {
+            // Name Reveal Animation
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
-                    text = "Scroll to explore",
-                    color = Color(0xFF4A5568),
-                    fontSize = 11.sp,
+                    text = displayedName.uppercase(),
+                    style = if (isMobile) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.headlineLarge,
+                    color = colors.accent,
+                    fontFamily = FontFamily.Monospace,
+                    fontWeight = FontWeight.ExtraBold,
                     letterSpacing = 1.sp
                 )
-                Spacer(Modifier.height(4.dp))
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowDown,
-                    contentDescription = "Scroll down",
-                    tint = Color(0xFF4A5568),
-                    modifier = Modifier.size(20.dp)
+                Box(
+                    modifier = Modifier
+                        .size(if (isMobile) 8.dp else 10.dp, if (isMobile) 14.dp else 20.dp)
+                        .background(colors.accent.copy(alpha = cursorVisible))
                 )
             }
+
+            Text(
+                text = "THE ARCHITECT",
+                style = if (isMobile) MaterialTheme.typography.titleMedium else MaterialTheme.typography.titleLarge,
+                color = colors.primary,
+                fontWeight = FontWeight.ExtraBold,
+                letterSpacing = 1.sp
+            )
+
+            Text(
+                text = PortfolioData.role.uppercase(),
+                style = if (isMobile) MaterialTheme.typography.labelSmall else MaterialTheme.typography.labelMedium,
+                color = colors.textSecondary.copy(alpha = 0.8f),
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.Monospace,
+                letterSpacing = 1.5.sp
+            )
+        }
+    }
+}
+
+@Composable
+private fun MainTextAndButtonsBlock(
+    colors: PortfolioColors,
+    spacing: Spacing,
+    onContactClick: () -> Unit,
+    onViewWorkClick: () -> Unit,
+    isMobile: Boolean
+) {
+    Column {
+        // Hero Main Title
+        Text(
+            text = "Engineering Human-Centric Android Ecosystems.",
+            style = MaterialTheme.typography.displaySmall.copy(
+                fontSize = if (isMobile) 32.sp else 40.sp,
+                lineHeight = if (isMobile) 40.sp else 48.sp
+            ),
+            color = colors.primary,
+            fontWeight = FontWeight.ExtraBold,
+            modifier = Modifier.widthIn(max = 800.dp)
+        )
+
+        Spacer(Modifier.height(spacing.large))
+
+        // Tagline block with left accent border
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .width(4.dp)
+                    .height(54.dp)
+                    .background(colors.accent, RoundedCornerShape(2.dp))
+            )
+            Spacer(Modifier.width(spacing.medium))
+            Text(
+                text = "Specializing in high-performance architectures, Jetpack Compose, and Kotlin Multiplatform for enterprise-scale mobile experiences.",
+                style = MaterialTheme.typography.bodyLarge,
+                color = colors.textSecondary,
+                lineHeight = 24.sp,
+                modifier = Modifier.widthIn(max = 600.dp)
+            )
         }
     }
 }
